@@ -1,1 +1,17 @@
-<p>task works!</p>
+<div class="container mt-5 px-4 form-container">
+  <button class="x-button btn-sm ms-2 top-right-button"  (click)="openConfirmationModal()">X</button>
+<h2>Hola {{usuario}}, aquí tienes tu</h2>
+  <h2 class="my-3 mb-5">{{ title }}</h2>
+  <form [formGroup]="taskForm" (ngSubmit)="addTask($event)">
+    <div class="mb-3 d-flex">
+      <h3 class="task-text me-2">Tarea: </h3>
+      <input type="text" class="form-control me-2" formControlName="newTask" placeholder="Ingrese una nueva tarea">
+      <button type="submit" class="sign" (click)="addTask($event)">Agregar</button>
+    </div>
+  </form>
+  <div *ngFor="let task of taskList; let i = index" class="d-flex mb-2">
+    <input type="checkbox" [(ngModel)]="task.selected" class="form-check-input me-2">
+    {{ task.task }}
+    <button *ngIf="!task.selected" (click)="removeTask(i)" class="x-button btn-sm ms-2">X</button>
+  </div>
+</div>
